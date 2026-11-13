@@ -40,7 +40,12 @@ mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
 ```
 
 The program copies `entry.png` to `$MAKEFUN_OUTPUT_DIR/entry.png` (default `/output`),
-creating the directory if needed. Python 3.13, standard library only, no network.
+creating the directory if needed, then re-reads the copy and verifies its SHA-256
+against the source and against the digest pinned in `main.py`
+(`ce25d11f3d412dbf9ea223f5133b727344be5b623c4d63e8cdce9a85c5b939fc`). A mismatch
+raises `RuntimeError` and nothing is silently published. It prints the digest of the
+written file, so two runs should report the same value. Python 3, standard library
+only, no network.
 
 ## Stories and sources
 
